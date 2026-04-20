@@ -7,7 +7,7 @@
 
 using namespace geode::prelude;
 
-class BlockHubPopup : public FLAlertLayer {
+class BlockHubPopup : public FLAlertLayer, public TextInputDelegate {
 protected:
     int m_categoryID;
     CCMenu* m_menu;
