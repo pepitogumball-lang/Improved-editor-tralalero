@@ -11,7 +11,7 @@ class BlockHubPopup : public FLAlertLayer, public TextInputDelegate {
 protected:
     int m_categoryID;
     CCMenu* m_menu;
-    CCScrollLayerExt* m_scrollLayer;
+    ScrollLayer* m_scrollLayer;
     CCTextInputNode* m_searchInput;
     std::map<int, std::vector<int>> m_blockGroups;
     std::map<int, std::string> m_groupNames;
