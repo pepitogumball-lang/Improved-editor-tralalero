@@ -22,17 +22,17 @@ bool BlockHubPopup::init(int categoryID) {
 
     // Campo de búsqueda
     m_searchInput = CCTextInputNode::create(200.f, 30.f, "Buscar...", "bigFont.fnt");
-    m_searchInput->setPosition({0, 130});
+    m_searchInput->setPosition({0.f, 130.f});
     m_searchInput->setDelegate(this);
     this->addChild(m_searchInput);
 
     // Botón de favoritos
     auto favBtn = CCMenuItemSpriteExtra::create(
-        ButtonSprite::create("⭐ Favoritos"),
+        ButtonSprite::create("Favoritos"),
         this,
         menu_selector(BlockHubPopup::onToggleFavorites)
     );
-    favBtn->setPosition({-150, 130});
+    favBtn->setPosition({-150.f, 130.f});
     this->addChild(favBtn);
 
     // Botones de subcategorías
@@ -40,7 +40,7 @@ bool BlockHubPopup::init(int categoryID) {
     m_menu->setPosition(CCPointZero);
     this->addChild(m_menu);
 
-    int y = 80;
+    float y = 80.f;
     for (auto& pair : m_groupNames) {
         auto btn = CCMenuItemSpriteExtra::create(
             ButtonSprite::create(pair.second.c_str()),
@@ -48,14 +48,14 @@ bool BlockHubPopup::init(int categoryID) {
             menu_selector(BlockHubPopup::onSelectSubcategory)
         );
         btn->setTag(pair.first);
-        btn->setPosition({0, y});
+        btn->setPosition({0.f, y});
         m_menu->addChild(btn);
-        y -= 40;
+        y -= 40.f;
     }
 
     // Scroll layer para bloques
-    m_scrollLayer = CCScrollLayerExt::create(CCRect(0, 0, 400, 200));
-    m_scrollLayer->setPosition({-200, -120});
+    m_scrollLayer = CCScrollLayerExt::create(CCSize(400.f, 200.f));
+    m_scrollLayer->setPosition({-200.f, -120.f});
     this->addChild(m_scrollLayer);
 
     return true;
@@ -65,7 +65,7 @@ void BlockHubPopup::setupBlockGroups() {
     // Categoría de bloques (categoryID == 1)
     if (m_categoryID == 1) {
         m_groupNames = {
-            {1, "Bloques Básicos"},
+            {1, "Bloques Basicos"},
             {2, "Slopes"},
             {3, "Spikes"},
             {4, "Orbes"},
@@ -75,14 +75,14 @@ void BlockHubPopup::setupBlockGroups() {
             {8, "Hazards"}
         };
         m_blockGroups = {
-            {1, {1, 2, 3, 4, 5, 6, 7, 8}},  // Bloques básicos
-            {2, {9, 10, 11, 12}},            // Slopes
-            {3, {13, 14, 15, 16}},           // Spikes
-            {4, {17, 18, 19, 20}},           // Orbes
-            {5, {21, 22, 23}},               // Portales
-            {6, {24, 25, 26}},               // Pads
-            {7, {27, 28, 29}},               // Rings
-            {8, {30, 31, 32}}                // Hazards
+            {1, {1, 2, 3, 4, 5, 6, 7, 8}},
+            {2, {9, 10, 11, 12}},
+            {3, {13, 14, 15, 16}},
+            {4, {17, 18, 19, 20}},
+            {5, {21, 22, 23}},
+            {6, {24, 25, 26}},
+            {7, {27, 28, 29}},
+            {8, {30, 31, 32}}
         };
     }
     // Categoría de triggers (categoryID == 2)
@@ -123,7 +123,6 @@ void BlockHubPopup::setupBlockGroups() {
             {4, {209, 210, 211}}
         };
     }
-    // Agregar más si es necesario
 }
 
 void BlockHubPopup::onSelectSubcategory(CCObject* sender) {
@@ -136,11 +135,12 @@ void BlockHubPopup::showSubcategory(int groupID) {
 
     m_filteredBlocks = m_blockGroups[groupID];
 
-    int x = 0, y = 0;
+    float x = 0.f, y = 0.f;
     int col = 0;
     for (int blockID : m_filteredBlocks) {
-        auto spr = CCSprite::createWithSpriteFrameName("block.png");  // Placeholder
+        auto spr = CCSprite::createWithSpriteFrameName("block.png");
         if (!spr) spr = CCSprite::create("block.png");
+        if (!spr) continue;
         auto btn = CCMenuItemSpriteExtra::create(
             spr,
             this,
@@ -150,33 +150,29 @@ void BlockHubPopup::showSubcategory(int groupID) {
         btn->setPosition({x, y});
         m_scrollLayer->m_contentLayer->addChild(btn);
 
-        // Botón pequeño para agregar a favoritos
         auto favBtn = CCMenuItemSpriteExtra::create(
-            CCSprite::createWithSpriteFrameName("GJ_starBtn_001.png"),  // Placeholder para estrella
+            CCSprite::createWithSpriteFrameName("GJ_starBtn_001.png"),
             this,
             menu_selector(BlockHubPopup::onAddToFavorites)
         );
         favBtn->setTag(blockID);
         favBtn->setScale(0.5f);
-        favBtn->setPosition({x + 20, y + 20});
+        favBtn->setPosition({x + 20.f, y + 20.f});
         m_scrollLayer->m_contentLayer->addChild(favBtn);
 
         col++;
-        x += 50;
+        x += 50.f;
         if (col >= 7) {
             col = 0;
-            x = 0;
-            y -= 50;
+            x = 0.f;
+            y -= 50.f;
         }
     }
-
-    m_scrollLayer->updateScrollBounds();
 }
 
 void BlockHubPopup::onSelectBlock(CCObject* sender) {
     int blockID = sender->getTag();
-    // Seleccionar el bloque en el editor
-    // EditorUI::get()->selectObject(blockID, true);
+    (void)blockID;
     this->onClose(nullptr);
 }
 
@@ -185,7 +181,6 @@ void BlockHubPopup::onToggleFavorites(CCObject* sender) {
     if (m_showingFavorites) {
         showFavorites();
     } else {
-        // Volver a subcategoría actual, asumiendo la primera
         showSubcategory(1);
     }
 }
@@ -193,11 +188,12 @@ void BlockHubPopup::onToggleFavorites(CCObject* sender) {
 void BlockHubPopup::showFavorites() {
     m_scrollLayer->m_contentLayer->removeAllChildren();
 
-    int x = 0, y = 0;
+    float x = 0.f, y = 0.f;
     int col = 0;
     for (int blockID : m_favorites) {
-        auto spr = CCSprite::createWithSpriteFrameName("block.png");  // Placeholder
+        auto spr = CCSprite::createWithSpriteFrameName("block.png");
         if (!spr) spr = CCSprite::create("block.png");
+        if (!spr) continue;
         auto btn = CCMenuItemSpriteExtra::create(
             spr,
             this,
@@ -207,7 +203,6 @@ void BlockHubPopup::showFavorites() {
         btn->setPosition({x, y});
         m_scrollLayer->m_contentLayer->addChild(btn);
 
-        // Botón pequeño para remover de favoritos
         auto removeBtn = CCMenuItemSpriteExtra::create(
             CCSprite::createWithSpriteFrameName("GJ_deleteBtn_001.png"),
             this,
@@ -215,28 +210,26 @@ void BlockHubPopup::showFavorites() {
         );
         removeBtn->setTag(blockID);
         removeBtn->setScale(0.5f);
-        removeBtn->setPosition({x + 20, y + 20});
+        removeBtn->setPosition({x + 20.f, y + 20.f});
         m_scrollLayer->m_contentLayer->addChild(removeBtn);
 
         col++;
-        x += 50;
+        x += 50.f;
         if (col >= 7) {
             col = 0;
-            x = 0;
-            y -= 50;
+            x = 0.f;
+            y -= 50.f;
         }
     }
-
-    m_scrollLayer->updateScrollBounds();
 }
 
 void BlockHubPopup::onAddToFavorites(CCObject* sender) {
     int blockID = sender->getTag();
     auto it = std::find(m_favorites.begin(), m_favorites.end(), blockID);
     if (it != m_favorites.end()) {
-        m_favorites.erase(it);  // Remover
+        m_favorites.erase(it);
     } else {
-        m_favorites.push_back(blockID);  // Agregar
+        m_favorites.push_back(blockID);
     }
     saveFavorites();
     if (m_showingFavorites) {
@@ -245,17 +238,23 @@ void BlockHubPopup::onAddToFavorites(CCObject* sender) {
 }
 
 void BlockHubPopup::loadFavorites() {
-    // Cargar desde Mod::get()->getSavedValue o algo similar
-    // Placeholder: cargar desde un archivo o settings
-    m_favorites = {1, 2, 3};  // Ejemplo
+    m_favorites = {};
 }
 
 void BlockHubPopup::saveFavorites() {
-    // Guardar en Mod::get()->setSavedValue
-    // Placeholder
+    // TODO: Mod::get()->setSavedValue
+}
+
+void BlockHubPopup::onSearch(CCObject* sender) {
+    (void)sender;
+}
+
+void BlockHubPopup::filterBlocks(const std::string& query) {
+    (void)query;
 }
 
 void BlockHubPopup::onClose(CCObject* sender) {
+    (void)sender;
     this->setKeypadEnabled(false);
     this->removeFromParentAndCleanup(true);
 }
