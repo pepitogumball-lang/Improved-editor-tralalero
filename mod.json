@@ -1,0 +1,10 @@
+{
+    "geode": ">=5.6.1",
+    "platforms": ["android64", "android32"],
+    "version": "1.0.0",
+    "id": "pepitogumball-lang.improved-editor-tralalero",
+    "name": "Improved Editor Tralalero",
+    "description": "Reorganiza los bloques en el editor con hubs categorizados para facilitar la selección.",
+    "developer": "pepitogumball-lang",
+    "repository": "https://github.com/pepitogumball-lang/Improved-editor-tralalero"
+}

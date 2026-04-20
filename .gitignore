@@ -1,0 +1,4 @@
+build/
+*.geode
+.vscode/
+.DS_Store
