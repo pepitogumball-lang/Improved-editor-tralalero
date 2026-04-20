@@ -1,6 +1,6 @@
 {
     "geode": ">=5.6.1",
-    "platforms": ["android64", "android32"],
+    "platforms": ["android64", "android32", "win"],
     "version": "1.0.0",
     "id": "pepitogumball-lang.improved-editor-tralalero",
     "name": "Improved Editor Tralalero",
