@@ -1,52 +1,84 @@
 # Improved Editor Tralalero
 
-Un mod para Geode que mejora el editor de Geometry Dash reorganizando los bloques en hubs categorizados.
+Un mod avanzado para Geode que revoluciona el editor de Geometry Dash reorganizando los bloques en hubs categorizados inteligentes.
 
-## Características
+## Características Principales 🔥
 
-- Al seleccionar una categoría en el editor, se abre un hub con subcategorías.
-- Cada subcategoría muestra bloques organizados en un grid con scroll.
-- Campo de búsqueda para filtrar bloques por ID.
-- Botón de cerrar para salir del hub.
-- Soporte para múltiples categorías: bloques, triggers, decoraciones, etc.
+- **Hubs Categorizados**: Al seleccionar una categoría, se abre un popup con subcategorías organizadas.
+- **Búsqueda en Tiempo Real 🔍**: Campo de búsqueda para filtrar bloques por ID o nombre.
+- **Sistema de Favoritos ⭐**: Agrega bloques a favoritos con un clic, y accede rápidamente a ellos.
+- **Scroll Infinito**: Grid con scroll para manejar cientos de bloques sin problemas.
+- **Múltiples Categorías**: Soporte completo para bloques, triggers, decoraciones y más.
+- **Interfaz Moderna**: Diseño limpio con botones intuitivos y animaciones suaves.
 
-## Categorías Implementadas
+## Categorías Disponibles
 
-### Bloques (ID 1)
-- Cuadrados
-- Slopes
-- Glow
-- Spikes
-- Orbes
+### 🧱 Bloques (ID 1)
+- Bloques Básicos: Normales, especiales
+- Slopes: Todas las pendientes
+- Spikes: Pinchos de todos tipos
+- Orbes: Portales amarillos, azules, etc.
+- Portales: Speed, gravity, etc.
+- Pads: Jump pads, dash pads
+- Rings: Coin rings, etc.
+- Hazards: Saw blades, etc.
 
-### Triggers (ID 2)
-- Move
-- Rotate
-- Scale
+### ⚙️ Triggers (ID 2)
+- Move: Mover objetos
+- Rotate: Rotar
+- Scale: Escalar
+- Alpha: Transparencia
+- Toggle: On/Off
+- Spawn: Spawnear
+- Animate: Animaciones
+- Follow: Seguir player
 
-## Instalación
+### 🎨 Decoraciones (ID 3)
+- Fondo: Elementos de fondo
+- Ground: Decoraciones terrestres
+- Animado: Decoraciones con animación
+- Efectos: Partículas y efectos
 
-1. Asegúrate de tener Geode 5.6.1 o superior instalado.
-2. Compila el mod para Android64 o Android32.
-3. Instala el .geode en tu dispositivo.
+## Instalación Automática 🚀
 
-## Compilación
+Gracias a GitHub Actions, el mod se compila automáticamente para Android64 y Android32.
 
-Usa CMake para compilar:
+1. Descarga el `.geode` desde [Releases](https://github.com/pepitogumball-lang/Improved-editor-tralalero/releases)
+2. Instala con Geode Loader
+3. ¡Disfruta!
+
+## Compilación Manual (Desarrolladores)
 
 ```bash
-mkdir build
-cd build
-cmake ..
+git clone https://github.com/pepitogumball-lang/Improved-editor-tralalero
+cd Improved-editor-tralalero
+mkdir build && cd build
+cmake .. -DGEODE_TARGET_PLATFORM=Android64
 make
 ```
 
-Asegúrate de tener la variable de entorno `GEODE_SDK` apuntando al directorio del SDK de Geode.
+Asegúrate de tener Geode SDK configurado.
 
-## Desarrollo
+## Uso en el Editor
 
-El código principal está en:
-- `src/main.cpp`: Hook principal.
-- `src/BlockHubPopup.cpp`: Implementación del popup del hub.
+1. Abre el editor de niveles en GD
+2. Selecciona una categoría (bloques, triggers, etc.)
+3. Se abre el BlockHub con subcategorías
+4. Usa búsqueda o favoritos para encontrar bloques rápido
+5. Click en un bloque para seleccionarlo
+6. Click ⭐ para agregarlo a favoritos
+
+## Contribuciones
+
+¡Bienvenido! Abre issues para bugs o sugerencias, o PRs para mejoras.
+
+## Licencia
+
+MIT License - Úsalo libremente, pero atribuye.
+
+## Créditos
+
+- Desarrollado con ❤️ usando Geode SDK
+- Inspirado en la comunidad de modding de GD
 
 Para más información sobre Geode SDK, visita [Geode Docs](https://docs.geode-sdk.org/).

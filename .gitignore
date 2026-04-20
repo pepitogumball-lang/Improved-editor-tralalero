@@ -1,4 +1,8 @@
 build/
+build-*/
 *.geode
 .vscode/
 .DS_Store
+Thumbs.db
+*.log
+.cache/
