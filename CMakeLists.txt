@@ -6,10 +6,9 @@ project(improved-editor-tralalero VERSION 1.0.0)
 
 add_subdirectory($ENV{GEODE_SDK} ${CMAKE_CURRENT_BINARY_DIR}/geode)
 
-file(GLOB_RECURSE SOURCES
-    src/*.cpp
+add_library(${PROJECT_NAME} SHARED
+    src/main.cpp
+    src/BlockHubPopup.cpp
 )
-
-add_library(${PROJECT_NAME} SHARED ${SOURCES})
 
 setup_geode_mod(${PROJECT_NAME})
