@@ -54,7 +54,7 @@ bool BlockHubPopup::init(int categoryID) {
     }
 
     // Scroll layer para bloques
-    m_scrollLayer = CCScrollLayerExt::create(CCSize(400.f, 200.f));
+    m_scrollLayer = ScrollLayer::create(CCSize(400.f, 200.f));
     m_scrollLayer->setPosition({-200.f, -120.f});
     this->addChild(m_scrollLayer);
 
